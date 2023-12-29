@@ -17,4 +17,26 @@ final class LuaTests: XCTestCase {
         let decompiledData = decompiler.decompileData(data)
         XCTAssertNotNil(decompiledData)
     }
+
+    func testLuaContext() throws {
+        let context = LuaContext()
+        try context.parse("""
+        globalVar = { 0.0, 1.0 }
+
+        function myFunction(parameter)
+            if parameter >= globalVar[1] and parameter <= globalVar[2] then
+                return 1
+            else
+                return 0
+            end
+        end
+        """)
+
+        XCTAssertEqual(context["globalVar"] as! Array<Double>, [0.0, 1.0])
+
+        XCTAssertEqual(try context.call("myFunction", with: [0.5]) as! Bool, true)
+
+        context.setObject([0.2, 0.4], forKeyedSubscript: "globalVar" as NSString)
+        XCTAssertEqual(try context.call("myFunction", with: [0.5]) as! Bool, false)
+    }
 }

@@ -15,6 +15,7 @@ let package = Package(
             name: "Lua",
             cSettings: [
                 .headerSearchPath("lua"),
+                .headerSearchPath("luacompact53"),
                 .headerSearchPath("luadec"),
             ]),
         .testTarget(
