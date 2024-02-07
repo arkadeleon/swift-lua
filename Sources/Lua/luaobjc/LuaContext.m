@@ -103,6 +103,18 @@ static const luaL_Reg loadedlibs[] = {
         lua_close(L);
 }
 
+- (BOOL)load:(NSData *)data error:(out NSError *__autoreleasing *)error {
+    int result = luaL_loadbuffer(L, data.bytes, data.length, NULL) || lua_pcall(L, 0, LUA_MULTRET, 0);
+    if( result == LUA_OK )
+        return YES;
+    if( error ) {
+        *error = [NSError errorWithDomain:LuaErrorDomain
+                                     code:result
+                                 userInfo:@{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Could not load script: %s", lua_tostring(L,-1)] }];
+    }
+    return NO;
+}
+
 - (BOOL)parse:(NSString *)script error:(NSError *__autoreleasing *)error {
     int result = luaL_dostring(L, [script UTF8String]);
     if( result == LUA_OK )
@@ -350,7 +362,7 @@ static inline id toObjC(lua_State *L, int index) {
         case LUA_TBOOLEAN:
             return @(lua_tonumber(L, index) > 0);
         case LUA_TSTRING:
-            return [NSString stringWithUTF8String:lua_tostring(L, index)];
+            return [NSString stringWithCString:lua_tostring(L, index) encoding:NSASCIIStringEncoding];
         case LUA_TTABLE:
         {
             BOOL isDict = NO;

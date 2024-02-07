@@ -55,6 +55,8 @@ typedef NS_ENUM(NSUInteger, LuaErrorCode) {
  */
 @interface LuaContext : NSObject
 
+- (BOOL)load:(NSData*)data error:(out NSError**)error;
+
 /**
  @param script A Lua script to be parsed and added to this context
  @param error will only be set if this method returns `NO`

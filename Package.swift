@@ -23,10 +23,12 @@ let package = Package(
             dependencies: ["Lua"],
             resources: [
                 .copy("iteminfo.lub"),
-                .copy("jobinheritlist.lua"),
-                .copy("skillid.lua"),
-                .copy("skillinfolist.lua"),
-                .copy("skilldescript.lua"),
+                .copy("jobinheritlist.lub"),
+                .copy("skillid.lub"),
+                .copy("skillinfolist.lub"),
+                .copy("skilldescript.lub"),
+                .copy("accessoryid.lub"),
+                .copy("accname.lub"),
             ]),
     ]
 )
