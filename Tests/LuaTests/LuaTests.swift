@@ -25,9 +25,9 @@ final class LuaTests: XCTestCase {
 
         function myFunction(parameter)
             if parameter >= globalVar[1] and parameter <= globalVar[2] then
-                return 1
+                return true
             else
-                return 0
+                return false
             end
         end
         """)

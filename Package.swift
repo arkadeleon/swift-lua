@@ -1,4 +1,4 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -22,13 +22,13 @@ let package = Package(
             name: "LuaTests",
             dependencies: ["Lua"],
             resources: [
-                .copy("iteminfo.lub"),
-                .copy("jobinheritlist.lub"),
-                .copy("skillid.lub"),
-                .copy("skillinfolist.lub"),
-                .copy("skilldescript.lub"),
-                .copy("accessoryid.lub"),
-                .copy("accname.lub"),
+                .copy("Resources/iteminfo.lub"),
+                .copy("Resources/jobinheritlist.lub"),
+                .copy("Resources/skillid.lub"),
+                .copy("Resources/skillinfolist.lub"),
+                .copy("Resources/skilldescript.lub"),
+                .copy("Resources/accessoryid.lub"),
+                .copy("Resources/accname.lub"),
             ]),
     ]
 )

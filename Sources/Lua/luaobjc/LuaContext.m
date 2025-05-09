@@ -360,7 +360,7 @@ static inline id toObjC(lua_State *L, int index) {
         case LUA_TNUMBER:
             return @(lua_tonumber(L, index));
         case LUA_TBOOLEAN:
-            return @(lua_tonumber(L, index) > 0);
+            return @(lua_toboolean(L, index));
         case LUA_TSTRING:
             return [NSString stringWithCString:lua_tostring(L, index) encoding:NSASCIIStringEncoding];
         case LUA_TTABLE:
